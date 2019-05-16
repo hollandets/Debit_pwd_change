@@ -17,12 +17,12 @@ for script_name in $work_folder/${file_list}
 do
   echo "Start with File:       ${script_name}"
   echo "Copying script to backup file ..."
-  cp ${script_name} ${script_name}_backup_pwd_change
+  cp ${script_name} ${script_name}_backup_${now}
   echo "Changing password in script"
 #decrypt old file and put its content to temporary file
-  crypt $encrypt_key < ${script_name}_backup_pwd_change > ./temporary_file
+  crypt $encrypt_key < ${script_name}_backup_${now} > ./temporary_file
 #old_pwd - is an old password, change it to the new one
-  sed -i "s/old_pwd/${new_pwd}/g" ./temporary_file
+  sed -i "s/${old_pwd}/${new_pwd}/g" ./temporary_file
 #encrypt new password
   cat ./temporary_file | crypt --encrypt $encrypt_key > ${script_name}
   rm ./temporary_file

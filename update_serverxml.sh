@@ -18,5 +18,5 @@ do
   cp ${script_name} ${script_name}_backup_${now}
   echo "Changing password in script"
 #29301927e4e1ccb6aee75a1cefb11fdc - is encrypted old password
-  sed -i "s/29301927e4e1ccb6aee75a1cefb11fdc/${new_crypted_pwd}/g" ${script_name}
+  sed -i "s/${old_pwd}/${new_crypted_pwd}/g" ${script_name}
 done
