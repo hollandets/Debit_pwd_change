@@ -7,13 +7,11 @@ old_pwd=$1
 # as the second incoming parameter to the script
 new_pwd=$2
 #file_list - the list of files in /u/debit/lib/ to be updated
-file_list=".dbpasswd_pair2 .dbpasswd_fincredrules .newdbpasswd_credrules .dbpasswd_credrules_debitapp03 .dbpasswd_credrules_aws_prod .dbpasswd_aws_prod .credDbPasswd .dbpasswd_credrules_aws11 .dbpasswd_aws11 .credDbPasswd_aws11 .dbpasswd_credrules .dbpasswd"
-#work_folder - the path to the folder for backuping initial scripts
-work_folder=/u/debit/lib
+file_list="/u/debit/lib/.dbpasswd_pair2 /u/debit/lib/.dbpasswd_fincredrules /u/debit/lib/.newdbpasswd_credrules /u/debit/lib/.dbpasswd_credrules_debitapp03 /u/debit/lib/.dbpasswd_credrules_aws_prod /u/debit/lib/.dbpasswd_aws_prod /u/debit/lib/.credDbPasswd /u/debit/lib/.dbpasswd_credrules_aws11 /u/debit/lib/.dbpasswd_aws11 /u/debit/lib/.credDbPasswd_aws11 /u/debit/lib/.dbpasswd_credrules /u/debit/lib/.dbpasswd"
 #encrypt_key - ENCRYPTION_KEY
 encrypt_key=/u/debit/lib
 
-for script_name in $work_folder/${file_list}
+for script_name in ${file_list}
 do
   if [ -f "$script_name" ]; then
     echo "Start with File:       ${script_name}"
