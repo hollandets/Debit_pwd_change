@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 now=`date +%Y%M%d%H%m%S`
 #old_pwd - old password, it could be provided as the first incoming parameter to the script
 old_pwd=$1
@@ -11,7 +11,7 @@ path_list="/u/ixc/orawork /u/ixc/orawork/Whitelist /u/debit/bin"
 for path in $path_list
 do
   echo "Start with Folder:     ${path}"
-  find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" | grep -i "PASSW.*${old_pwd}" | grep -v 'Password for oracle user' | sed 's/:.*//' | sort -u > ./temporary_file
+  find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "PASSW.*${old_pwd}" | grep -v 'Password for oracle user' | sed 's/:.*//' | sort -u > ./temporary_file
   echo "Copying script to backup file ..."
   while read script_name
   do
@@ -25,7 +25,7 @@ done
 for path in $path_list
 do
   echo "Start with Folder:     ${path}"
-  find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" | grep -i "debit/${old_pwd}" | sed 's/:.*//' | sort -u > ./temporary_file
+  find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "debit/${old_pwd}" | sed 's/:.*//' | sort -u > ./temporary_file
   echo "Copying script to backup file ..."
   while read script_name
   do
