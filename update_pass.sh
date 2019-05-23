@@ -26,7 +26,6 @@ do
       sed "s/${old_pwd}/${new_pwd}/g" ./temporary_file > ./temp_solaris.tmp && mv ./temp_solaris.tmp ./temporary_file
 #encrypt new password for Solaris SunOS
       cat ./temporary_file | crypt $encrypt_key > ${script_name}
-      rm ./temp_solaris.tmp
     else
 #changing all the entries of old_pwd to new_pwd in decrypted temporary file
       sed -i "s/${old_pwd}/${new_pwd}/g" ./temporary_file
