@@ -11,27 +11,47 @@ path_list="/u/ixc/orawork /u/ixc/orawork/Whitelist /u/debit/bin"
 for path in $path_list
 do
   echo "Start with Folder:     ${path}"
-  find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "PASSW.*${old_pwd}" | grep -v 'Password for oracle user' | sed 's/:.*//' | sort -u > ./temporary_file
-  echo "Copying script to backup file ..."
+#search for files in the folder where old_pwd seems to be written as plain text after the combination "passw"
+#put the found list to the temporary file
+  find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "PASSW.*${old_pwd}" | grep -v '[/ ]${old_pwd}' | sed 's/:.*//' | sort -u > ./temporary_file
+#loop for every found file to backup it and change the password
   while read script_name
   do
-    cp ${script_name} ${script_name}_backup_${now}
+    cp $script_name ${script_name}_backup_${now}
+    echo "  File ${script_name} has just been backuped"
+    echo "    Changing password in script ..."
+    if [ $(uname) == "SunOS" ]; then
+#changing all the entries of old_pwd to new_pwd via creating temp file for Solaris SunOS
+      sed "/[Pp][Aa][Ss][Ss][Ww].*[^\/ ]${old_pwd}/s/${old_pwd}/${new_pwd}/g" $script_name > ./temp_solaris.tmp && mv ./temp_solaris.tmp $script_name
+    else 
+#changing all the entries of old_pwd to new_pwd in script
+      sed -i "/[Pp][Aa][Ss][Ss][Ww].*[^\/ ]${old_pwd}/s/${old_pwd}/${new_pwd}/g" $script_name
+    fi
   done < ./temporary_file
-  echo "Changing password in script"
-  cat ./temporary_file | xargs sed -i "/[Pp][Aa][Ss][Ss][Ww].*[^\/ ]${old_pwd}/s/${old_pwd}/${new_pwd}/g"
   rm ./temporary_file
+  echo "Finished with Folder:  ${path}"
 done
 
 for path in $path_list
 do
   echo "Start with Folder:     ${path}"
+#search for files in the folder where old_pwd seems to be written as plain text after the combination "debit/"
+#put the found list to the temporary file
   find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "debit/${old_pwd}" | sed 's/:.*//' | sort -u > ./temporary_file
-  echo "Copying script to backup file ..."
+#loop for every found file to backup it and change the password
   while read script_name
   do
-    cp ${script_name} ${script_name}_backup_${now}
+    cp $script_name ${script_name}_backup_${now}
+    echo "  File ${script_name} has just been backuped"
+    echo "    Changing password in script ..."
+    if [ $(uname) == "SunOS" ]; then
+#changing all the entries of old_pwd to new_pwd via creating temp file for Solaris SunOS
+      sed "/debit\/${old_pwd}/s/${old_pwd}/${new_pwd}/g" $script_name > ./temp_solaris.tmp && mv ./temp_solaris.tmp $script_name
+    else 
+#changing all the entries of old_pwd to new_pwd in script
+      sed -i "/debit\/${old_pwd}/s/${old_pwd}/${new_pwd}/g" $script_name
+    fi
   done < ./temporary_file
-  echo "Changing password in script"
-  cat ./temporary_file | xargs sed -i "/debit\/${old_pwd}/s/${old_pwd}/${new_pwd}/g"
   rm ./temporary_file
+  echo "Finished with Folder:  ${path}"
 done

@@ -11,7 +11,7 @@ file_list="/u/debit/apps/dnl/config-prod.toml /u/debit/apps/plan-store/config-pr
 for script_name in $file_list
 do
   if [ -f "$script_name" ]; then
-    echo "Start with File:    ${script_name}"
+    echo "Start with File:     ${script_name}"
     echo "    Copying script to backup file ..."
     cp $script_name ${script_name}_backup_${now}
     echo "    Changing password in script ..."
