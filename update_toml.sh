@@ -6,7 +6,7 @@ old_pwd=$1
 #new_pwd - new password, it could be provided as the second incoming parameter to the script
 new_pwd=$2
 #file_list - the list of files to be updated are found
-file_list="/u/debit/apps/dnl/config-prod.toml /u/debit/apps/plan-store/config-prod.toml"
+file_list="/u/debit/apps/dnl/config-prod.toml /u/debit/apps/plan-store/config-prod.toml /u/debit/apps/employee-plan/config-prod.toml"
 
 for script_name in $file_list
 do
