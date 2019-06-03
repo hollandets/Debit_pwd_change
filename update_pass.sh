@@ -1,5 +1,5 @@
 #!/bin/bash
-now=`date +%Y%M%d%H%m%S`
+now=`date +%Y%m%d%H%M%S`
 #old_pwd - old password, it could be provided as the first incoming parameter to the script
 old_pwd=$1
 #new_pwd - new password, it could be provided as the second incoming parameter to the script
