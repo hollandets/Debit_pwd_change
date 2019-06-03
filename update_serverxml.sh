@@ -6,14 +6,14 @@ old_pwd=$1
 #new_pwd - new password, it could be provided as the second incoming parameter to the script
 new_pwd=$2
 #file_list - the list of files to be updated are found
-file_list="/u/debit/apps/apache-tomcat/idt/server.xml.QA /u/debit/apps/apache-tomcat/idt/server.xml.DEV /u/debit/apps/apache-tomcat/idt/server.xml.PROD /u/debit/apps/apache-tomcat/conf/server.xml /u/debit/apps/webServerDistro_r1900/apache-tomcat-8.5.3/idt/server.xml.QA /u/debit/apps/tomcat/idt/server.xml.UAT /u/debit/apps/tomcat/idt/server.xml.UAT.MVNO /u/debit/apps/tomcat/idt/server.xml.QA.UAT.MVNO /u/debit/apps/tomcat/idt/server.xml.QA.UAT /u/debit/apps/tomcat/idt/server.xml.QA /u/debit/apps/tomcat/idt/server.xml.DEV"
+file_list="/u/debit/apps/webServerDistro_r1900/apache-tomcat-8.5.3/idt/server.xml.PROD /u/debit/apps/apache-tomcat/conf/server.xml /u/debit/apps/tomcat/idt/server.xml.PROD"
 #new_crypted_pwd - is made by Encryptor.sh like this =`./Encryptor.sh ${new_pwd}`
 new_crypted_pwd=$new_pwd
 
 for script_name in $file_list
 do
   if [ -f "$script_name" ]; then
-    echo "Start with File:     ${script_name}"
+    echo "Start with File:    ${script_name}"
     echo "    Copying script to backup file ..."
     cp $script_name ${script_name}_backup_${now}
     echo "    Changing password in script ..."

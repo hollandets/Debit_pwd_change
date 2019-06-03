@@ -5,14 +5,14 @@ old_pwd=$1
 #new_pwd - new password, it could be provided as the second incoming parameter to the script
 new_pwd=$2
 #file_list - the list of files in /u/debit/lib/ to be updated
-file_list="/u/debit/lib/.dbpasswd_pair2 /u/debit/lib/.dbpasswd_fincredrules /u/debit/lib/.newdbpasswd_credrules /u/debit/lib/.dbpasswd_credrules_debitapp03 /u/debit/lib/.dbpasswd_credrules_aws_prod /u/debit/lib/.dbpasswd_aws_prod /u/debit/lib/.credDbPasswd /u/debit/lib/.dbpasswd_credrules_aws11 /u/debit/lib/.dbpasswd_aws11 /u/debit/lib/.credDbPasswd_aws11 /u/debit/lib/.dbpasswd_credrules /u/debit/lib/.dbpasswd"
+file_list="/u/debit/lib/.dbpasswd_debit1 /u/debit/lib/.dbpasswd_credrules /u/debit/lib/.dbpasswd.debitapp01 /u/debit/lib/.debitapp01.dbpasswd /u/debit/lib/.debitapp02.dbpasswd /u/debit/lib/.debitapp04.dbpasswd /u/debit/lib/.debitapp03.dbpasswd /u/debit/lib/.debitapp01.dbpasswd_hold /u/debit/lib/.debitapp02.dbpasswd_hold /u/debit/lib/.debitapp03.dbpasswd_hold /u/debit/lib/.debitapp04.dbpasswd_hold /u/debit/lib/.debitapp01.dbpasswd_jbird /u/debit/lib/.credDbPasswd /u/debit/lib/.dbpasswd"
 #encrypt_key - ENCRYPTION_KEY
 encrypt_key=/u/debit/lib
 
 for script_name in $file_list
 do
   if [ -f "$script_name" ]; then
-    echo "Start with File:     ${script_name}"
+    echo "Start with File:    ${script_name}"
     echo "    Copying script to backup file ..."
     cp $script_name ${script_name}_backup_${now}
     echo "    Changing password in script ..."

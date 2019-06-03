@@ -6,7 +6,7 @@ old_pwd=$1
 # as the second incoming parameter to the script
 new_pwd=$2
 #path_list - the list of folders where scripts to be updated are found
-path_list="/u/ixc/orawork /u/ixc/orawork/Whitelist /u/debit/bin"
+path_list="/export/home/oracle/SQL /export/home/oracle/pingeneration /u/oracle/scripts /u/oracle/scripts/monitor /u/oracle/SQL /u/oracle/reporting/debit /u/ixc/jjbtmp /u/ixc/orawork /u/ixc/orawork/Whitelist /u/ixc/bin/MoneyGram /u/debit/bin /u/debit/lib /u/ops/lib"
 
 for path in $path_list
 do
