@@ -13,7 +13,11 @@ do
   echo "Start with Folder:     ${path}"
 #search for files in the folder where old_pwd seems to be written as plain text after the combination "passw"
 #put the found list to the temporary file
-  find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "PASSW.*${old_pwd}" | grep -v '[/ ]${old_pwd}' | sed 's/:.*//' | sort -u > ./temporary_file
+  if [ $(uname) == "SunOS" ]; then
+    find $path -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "PASSW.*${old_pwd}" | grep -v '[/ ]${old_pwd}' | sed 's/:.*//' | sort -u > ./temporary_file
+  else
+    find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "PASSW.*${old_pwd}" | grep -v '[/ ]${old_pwd}' | sed 's/:.*//' | sort -u > ./temporary_file
+  fi
 #loop for every found file to backup it and change the password
   while read script_name
   do
@@ -37,7 +41,11 @@ do
   echo "Start with Folder:     ${path}"
 #search for files in the folder where old_pwd seems to be written as plain text after the combination "debit/"
 #put the found list to the temporary file
-  find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "debit/${old_pwd}" | sed 's/:.*//' | sort -u > ./temporary_file
+  if [ $(uname) == "SunOS" ]; then
+    find $path -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "debit/${old_pwd}" | sed 's/:.*//' | sort -u > ./temporary_file
+  else
+    find $path -maxdepth 1 -type f | xargs grep -I "${old_pwd}" 2>&1 | grep -i "debit/${old_pwd}" | sed 's/:.*//' | sort -u > ./temporary_file
+  fi
 #loop for every found file to backup it and change the password
   while read script_name
   do
